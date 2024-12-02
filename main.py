@@ -23,4 +23,6 @@ class TelegramBot:
             'chat_id': self.chat_id,
             'text': message
         }
+        response = requests.post(url, data=data)
+        return response.json()
 
