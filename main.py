@@ -18,3 +18,9 @@ class TelegramBot:
         pass
 
     def send_message(self, message):
+        url = f'{self.base_url}/sendMessage'
+        data = {
+            'chat_id': self.chat_id,
+            'text': message
+        }
+
