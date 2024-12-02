@@ -8,3 +8,4 @@ class TelegramBot:
         self.bot_token = bot_token
         self.chat_id = chat_id
         self.base_url = f'https://api.telegram.org/bot{self.bot_token}'
+        self.verificar()
