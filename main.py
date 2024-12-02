@@ -16,3 +16,5 @@ class TelegramBot:
     def enviar_mensaje_telegram(self):
         
         pass
+
+    def send_message(self, message):
