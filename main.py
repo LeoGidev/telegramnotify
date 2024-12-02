@@ -25,4 +25,11 @@ class TelegramBot:
         }
         response = requests.post(url, data=data)
         return response.json()
+    
+
+if __name__ == "__main__":
+    load_dotenv()  # Cargar variables desde .env
+    bot_token = os.getenv('TELEGRAM_BOT_TOKEN')
+    chat_id = os.getenv('TELEGRAM_CHAT_ID')
+    bot = TelegramBot(bot_token, chat_id)
 
