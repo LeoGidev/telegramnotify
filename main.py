@@ -11,3 +11,8 @@ class TelegramBot:
         self.verificar()
 
     def verificar(self):
+
+    
+    def enviar_mensaje_telegram(self):
+        
+        pass
