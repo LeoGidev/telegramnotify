@@ -1,57 +1,37 @@
 import requests
 
 class TelegramBot:
-    def __init__(self, bot_token, chat_id):
-        self.bot_token = bot_token
-        self.chat_id = chat_id
+    def __init__(self):
+        self.bot_token = os.getenv("TELEGRAM_BOT_TOKEN")
+        self.chat_id = os.getenv("TELEGRAM_CHAT_ID")
         self.base_url = f'https://api.telegram.org/bot{self.bot_token}'
 
-    def enviar_mensaje_html(self, mensaje_html):
+    def enviar_mensaje_tabla_simulada(self, mensaje):
         url = f'{self.base_url}/sendMessage'
         data = {
             'chat_id': self.chat_id,
-            'text': mensaje_html,
-            'parse_mode': 'HTML'  # Especificar que usamos HTML
+            'text': mensaje,
+            'parse_mode': 'HTML'  # Usamos HTML solo para estilos básicos
         }
         response = requests.post(url, data=data)
         return response.json()
 
 if __name__ == "__main__":
-    bot_token = 'REMOVED'  # Reemplaza con tu token
-    chat_id = '-4254206027'  # Reemplaza con tu chat_id
-
-    # Crear la tabla en HTML
-    mensaje_html = """
-    <b>Reporte de Productos</b>
-    <table border="1" style="border-collapse: collapse; width: 100%;">
-        <tr>
-            <th>Producto</th>
-            <th>Ubicación</th>
-            <th>Stock</th>
-            <th>Mínimo</th>
-        </tr>
-        <tr>
-            <td>Producto A</td>
-            <td>Almacén 1</td>
-            <td>5</td>
-            <td>10</td>
-        </tr>
-        <tr>
-            <td>Producto B</td>
-            <td>Almacén 2</td>
-            <td>0</td>
-            <td>15</td>
-        </tr>
-        <tr>
-            <td>Producto C</td>
-            <td>Almacén 3</td>
-            <td>8</td>
-            <td>8</td>
-        </tr>
-    </table>
-    """
+    # Crear una tabla simulada
+    mensaje_simulado = """
+<b>Reporte de Productos</b>
+<pre>
++------------+------------+--------+--------+
+| Producto   | Ubicación  | Stock  | Mínimo |
++------------+------------+--------+--------+
+| Producto A | Almacén 1  | 5      | 10     |
+| Producto B | Almacén 2  | 0      | 15     |
+| Producto C | Almacén 3  | 8      | 8      |
++------------+------------+--------+--------+
+</pre>
+"""
 
     # Crear el bot e intentar enviar el mensaje
-    bot = TelegramBot(bot_token, chat_id)
-    respuesta = bot.enviar_mensaje_html(mensaje_html)
+    bot = TelegramBot()
+    respuesta = bot.enviar_mensaje_tabla_simulada(mensaje_simulado)
     print(respuesta)
