@@ -28,8 +28,12 @@ class TelegramBot:
     
 
 if __name__ == "__main__":
-    load_dotenv()  # Cargar variables desde .env
+    # Cargar claves desde .env
+    load_dotenv()
     bot_token = os.getenv('TELEGRAM_BOT_TOKEN')
     chat_id = os.getenv('TELEGRAM_CHAT_ID')
+
+    # Inicializar y enviar mensaje
     bot = TelegramBot(bot_token, chat_id)
+    bot.enviar_tabla()
 
